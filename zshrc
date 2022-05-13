@@ -206,12 +206,14 @@ if [[ -n "${terminfo[kcuu1]}" ]]; then
     autoload -U up-line-or-beginning-search
     zle -N up-line-or-beginning-search
     bindkey "${terminfo[kcuu1]}" up-line-or-beginning-search
+    bindkey '^k' up-line-or-beginning-search
 fi
 # <DownArrow> Down a line or search downward based on starting letters
 if [[ -n "${terminfo[kcud1]}" ]]; then
     autoload -U down-line-or-beginning-search
     zle -N down-line-or-beginning-search
     bindkey "${terminfo[kcud1]}" down-line-or-beginning-search
+    bindkey '^j' down-line-or-beginning-search
 fi
 
 # <Home> Jump to the beginning of line
@@ -293,6 +295,7 @@ alias gau='git add --update'
 alias gcm="git commit -m"
 alias glg="git log --oneline --graph --all"
 alias gpl="git pull"
+alias gco="git checkout"
 
 alias gd='goldendict'
 # }}}
