@@ -3,7 +3,7 @@ export XDG_CONFIG_HOME="${HOME}/.config"
 export XDG_DATA_HOME="${HOME}/.local/share"
 export XDG_CACHE_HOME="${HOME}/.cache"
 export FPATH="${XDG_DATA_HOME}/zsh/site-functions:${FPATH}"
-export PATH="${HOME}/.local/bin:${PATH}"
+export PATH="${HOME}/.cargo/bin:${HOME}/.local/bin:${PATH}"
 export EDITOR="vim"
 
 alias vi='vim -u NONE'
