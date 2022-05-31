@@ -7,8 +7,8 @@ export PATH="${HOME}/.cargo/bin:${HOME}/.local/bin:${PATH}"
 
 alias nvim='env VIMINIT= nvim'
 
-export EDITOR=nvim
-export VISUAL=nvim
+export EDITOR='env VIMINIT= nvim'
+export VISUAL='env VIMINIT= nvim'
 
 alias vi='vim -u NONE'
 
