@@ -13,9 +13,9 @@ export VISUAL='env VIMINIT= nvim'
 alias vi='vim -u NONE'
 
 # Proxies
-export NO_PROXY="localhost,127.0.0.1,localaddress,.localdomain.com"
-export HTTP_PROXY="http://127.0.0.1:9022/"
-export HTTPS_PROXY="http://127.0.0.1:9022/"
+#export NO_PROXY="localhost,127.0.0.1,localaddress,.localdomain.com"
+#export HTTP_PROXY="http://127.0.0.1:9022/"
+#export HTTPS_PROXY="http://127.0.0.1:9022/"
 
 # pyenv
 export PYENV_ROOT="${XDG_DATA_HOME}/pyenv"
