@@ -37,4 +37,4 @@ export NNN_TRASH=1
 export NNN_FIFO=/tmp/nnn.fifo
 
 # Let vim respect XDG
-export VIMINIT='if !has("nvim") | set rtp^=$XDG_CONFIG_HOME/vim | let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | so $MYVIMRC | endif'
+#export VIMINIT='if !has("nvim") | set rtp^=$XDG_CONFIG_HOME/vim | let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | so $MYVIMRC | endif'
