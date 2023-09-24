@@ -14,6 +14,8 @@ cd "${XDG_CONFIG_HOME}/zsh"
 make install
 ```
 
+新建 `${XDG_DATA_HOME}/zsh`，用于存放历史记录、补全脚本等
+
 安装插件管理器：
 
 ```bash
