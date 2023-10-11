@@ -285,23 +285,31 @@ alias ll="ls -lh"
 
 alias grep="grep --color=auto"
 
-alias sc='systemctl'
-alias scu='systemctl --user'
-compdef sc=systemctl
-compdef scu=systemctl
+if command -v systemctl &> /dev/null; then
+    alias sc='systemctl'
+    alias scu='systemctl --user'
+    compdef sc=systemctl
+    compdef scu=systemctl
+fi
 
-alias gst="git status"
-alias gau='git add --update'
-alias gcm="git commit -m"
-alias glg="git log --oneline --graph --all"
-alias gpl="git pull"
-alias gco="git checkout"
+if command -v git &> /dev/null; then
+    alias gst="git status"
+    alias gau='git add --update'
+    alias gcm="git commit -m"
+    alias glg="git log --oneline --graph --all"
+    alias gpl="git pull"
+    alias gco="git checkout"
+fi
 
-alias gd='goldendict'
+if command -v goldendict &> /dev/null; then
+    alias gd='goldendict'
+fi
 # }}}
 # Plugins (after) {{{
 # Aloxaf/fzf-tab {{{2
-enable-fzf-tab
+if command -v fzf &> /dev/null; then
+    enable-fzf-tab
+fi
 # }}}
 # }}}
 # Misc {{{
@@ -350,26 +358,34 @@ function pastebin() {
 }
 # }}}
 # Automatically change directory after exiting ranger {{{
-function ranger-cd {
-    tempfile="$(mktemp -t tmp.XXXXXX)"
-    ranger --choosedir="$tempfile" "${@:-$(pwd)}"
-    test -f "$tempfile" &&
-    if [ "$(cat -- "$tempfile")" != "$(echo -n `pwd`)" ]; then
-        cd -- "$(cat "$tempfile")"
-    fi
-    command rm -f -- "$tempfile"
-}
+if command -v ranger &> /dev/null; then
+    function ranger-cd {
+        tempfile="$(mktemp -t tmp.XXXXXX)"
+        ranger --choosedir="$tempfile" "${@:-$(pwd)}"
+        test -f "$tempfile" &&
+        if [ "$(cat -- "$tempfile")" != "$(echo -n `pwd`)" ]; then
+            cd -- "$(cat "$tempfile")"
+        fi
+        command rm -f -- "$tempfile"
+    }
 
-alias ra="ranger-cd"
+    alias ra="ranger-cd"
+fi
 # }}}
 # fzf {{{
-source /usr/share/fzf/key-bindings.zsh
+if command -v fzf &> /dev/null; then
+    source /usr/share/fzf/key-bindings.zsh
+fi
 # }}}
 # pyenv {{{
-eval "$(pyenv init -)"
+if command -v pyenv &> /dev/null; then
+    eval "$(pyenv init -)"
+fi
 # }}}
 # zoxide {{{
-eval "$(zoxide init zsh)"
+if command -v zoxide &> /dev/null; then
+    eval "$(zoxide init zsh)"
+fi
 # }}}
 # Remove duplicates in variables {{{
 typeset -U path fpath
