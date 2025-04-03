@@ -66,8 +66,8 @@ __PROMPT_EXITCODE="%(?..%? )"
 
 function __prompt_python() {
     local python_venv_tool=""
-    [[ -n ${PYENV_VERSION} || -f "./.python-version" ]] && python_venv_tool="pyenv"
-    [[ -n ${VIRTUAL_ENV} ]] && python_venv_tool="venv"
+    [[ -n ${PYENV_VERSION} || -f "./.python-version" ]] && python_venv_tool="pyenv|uv"
+    [[ -n ${VIRTUAL_ENV} ]] && python_venv_tool="venv: ${VIRTUAL_ENV_PROMPT:1:-2}"
     [[ ${POETRY_ACTIVE} -eq 1 ]] && python_venv_tool="poetry"
     [[ -z ${python_venv_tool} ]] && return
     local python_version=$(python -c "import platform; print(platform.python_version())")
