@@ -14,7 +14,7 @@ if command -v vim &> /dev/null; then
 fi
 
 # cargo
-if command -v pyenv &> /dev/null; then
+if command -v cargo &> /dev/null; then
     export PATH="${HOME}/.cargo/bin:${PATH}"
 fi
 
@@ -24,7 +24,7 @@ if command -v zoxide &> /dev/null; then
 fi
 
 # fzf
-if command -v zoxide &> /dev/null; then
+if command -v fzf &> /dev/null; then
     export FZF_DEFAULT_COMMAND='rg --files --hidden --glob !^node_modules$ --glob !.git'
 fi
 # virutalenvs: Disable the default virtualenv prompt change
