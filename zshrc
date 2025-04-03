@@ -372,6 +372,16 @@ if command -v ranger &> /dev/null; then
     alias ra="ranger-cd"
 fi
 # }}}
+# Automatically change directory after exiting yazi {{{
+function yy() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		cd -- "$cwd"
+	fi
+	\rm -f -- "$tmp"
+}
+# }}}
 # fzf {{{
 if command -v fzf &> /dev/null; then
     source /usr/share/fzf/key-bindings.zsh
