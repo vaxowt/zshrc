@@ -377,11 +377,6 @@ if command -v fzf &> /dev/null; then
     source /usr/share/fzf/key-bindings.zsh
 fi
 # }}}
-# pyenv {{{
-if command -v pyenv &> /dev/null; then
-    eval "$(pyenv init -)"
-fi
-# }}}
 # zoxide {{{
 if command -v zoxide &> /dev/null; then
     eval "$(zoxide init zsh)"

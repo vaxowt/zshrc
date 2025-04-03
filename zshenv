@@ -18,12 +18,6 @@ if command -v pyenv &> /dev/null; then
     export PATH="${HOME}/.cargo/bin:${PATH}"
 fi
 
-# pyenv
-if command -v pyenv &> /dev/null; then
-    export PYENV_ROOT="${XDG_DATA_HOME}/pyenv"
-    eval "$(pyenv init --path)"
-fi
-
 # zoxide
 if command -v zoxide &> /dev/null; then
     export _ZO_DATA="${XDG_CACHE_HOME}/zoxide/database"
