@@ -43,6 +43,9 @@ if command -v nnn &> /dev/null; then
     export NNN_FIFO=/tmp/nnn.fifo
 fi
 
+# python venv
+export PYTHON_VENV_HOME="${XDG_DATA_HOME}/venv"
+
 if [[ -f "${XDG_CONFIG_HOME}/zsh/env" ]]; then
     source "${XDG_CONFIG_HOME}/zsh/env"
 fi

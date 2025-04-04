@@ -392,6 +392,54 @@ if command -v zoxide &> /dev/null; then
     eval "$(zoxide init zsh)"
 fi
 # }}}
+# python venv {{{
+if [[ ! -z "${PYTHON_VENV_HOME}" ]]; then
+    function pv() {
+        local help_string=$(cat <<-END
+Usage: pv command [args]
+
+Commands:
+  list               List existing venvs
+  activate <venv>    Activate venv
+  help               Show this help
+
+VENV home: ${PYTHON_VENV_HOME}
+END
+)
+        local command="$1"
+        case "${command}" in
+            ls|list)
+                for d in ${PYTHON_VENV_HOME}/*; do
+                    local venv_name=$(basename "$d")
+                    [[ -x "${d}/bin/python" ]] && local python_version=$("${d}/bin/python" --version 2>/dev/null) || continue
+                    [[ "$VIRTUAL_ENV" = "$d" ]] && local prefix="* " || local prefix="  "
+                    [[ -f "${d}/bin/activate" ]] && echo "${prefix}${venv_name} (${python_version})"
+                done
+                return 0
+                ;;
+            a|ac|activate)
+                local venv_name="$2"
+                [[ -z "${venv_name}" ]] && echo "venv name is required" && return 1
+                if [[ -f "${PYTHON_VENV_HOME}/${venv_name}/bin/activate" ]]; then
+                    source "${PYTHON_VENV_HOME}/${venv_name}/bin/activate"
+                    return 0
+                else
+                    echo "'${venv_name}' does not exist"
+                    return 1
+                fi
+                ;;
+            ""|help)
+                echo "${help_string}"
+                return 0
+                ;;
+            *)
+                echo "${help_string}"
+                return 1
+                ;;
+        esac
+    }
+fi
+# }}}
 # Remove duplicates in variables {{{
 typeset -U path fpath
 # }}}
