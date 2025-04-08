@@ -27,10 +27,8 @@ fi
 if command -v fzf &> /dev/null; then
     export FZF_DEFAULT_COMMAND='rg --files --hidden --glob !^node_modules$ --glob !.git'
 fi
-# virutalenvs: Disable the default virtualenv prompt change
-if command -v virtualenv &> /dev/null; then
-    export VIRTUAL_ENV_DISABLE_PROMPT=1
-fi
+# Disable the default python venv prompt
+export VIRTUAL_ENV_DISABLE_PROMPT=1
 # Read man page with vim
 # export MANPAGER="vim -M +MANPAGER -"
 # Uncrustify
