@@ -21,6 +21,8 @@ function find-os() {
         elif [[ -f /etc/lsb-release || -d /etc/lsb-release.d ]]; then
             OS=$(lsb_release -i | cut -d: -f2 | sed s/'^\t'//)
         # Otherwise, use release info file
+        elif echo "$PREFIX" | grep -q com.termux; then
+            OS=termux
         else
             OS=$(ls -d /etc/[A-Za-z]*[_-][rv]e[lr]* | grep -v "lsb" | cut -d'/' -f3 | cut -d'-' -f1 | cut -d'_' -f1)
         fi
