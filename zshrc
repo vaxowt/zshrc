@@ -384,7 +384,17 @@ function yy() {
 # }}}
 # fzf {{{
 if command -v fzf &> /dev/null; then
-    source /usr/share/fzf/key-bindings.zsh
+    case "$__OS" in
+        arch)
+            source /usr/share/fzf/key-bindings.zsh
+            ;;
+        debian)
+            source /usr/share/doc/fzf/examples/key-bindings.zsh
+            ;;
+        *)
+            echo "[WARN] unhandled OS: '$__OS'"
+            ;;
+    esac
 fi
 # }}}
 # zoxide {{{

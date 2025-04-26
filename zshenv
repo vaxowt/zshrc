@@ -7,6 +7,32 @@ export XDG_CACHE_HOME="${HOME}/.cache"
 export FPATH="${XDG_DATA_HOME}/zsh/site-functions:${FPATH}"
 export PATH="${HOME}/.local/bin:${PATH}"
 
+function find-os() {
+    # Copyright: https://gist.github.com/k-sriram/6b8810da73e2fd331eaa5a5c2ffb148e
+    local UNAME OS
+    # Determine OS platform
+    UNAME=$(uname | tr "[:upper:]" "[:lower:]")
+    # If Linux, try to determine specific distribution
+    if [[ "$UNAME" == "linux" ]]; then
+        # First check if os-release is available
+        if [[ -f /etc/os-release ]]; then
+            OS=$(grep -Po "(?<=^ID=).*(?=$)" /etc/os-release)
+        # If available, use LSB to identify distribution
+        elif [[ -f /etc/lsb-release || -d /etc/lsb-release.d ]]; then
+            OS=$(lsb_release -i | cut -d: -f2 | sed s/'^\t'//)
+        # Otherwise, use release info file
+        else
+            OS=$(ls -d /etc/[A-Za-z]*[_-][rv]e[lr]* | grep -v "lsb" | cut -d'/' -f3 | cut -d'-' -f1 | cut -d'_' -f1)
+        fi
+    fi
+    # For everything else (or if above failed), just use generic identifier
+    [[ "$OS" == "" ]] && OS=$UNAME
+    OS=${(L)OS}
+    echo -n $OS
+}
+
+export __OS=$(find-os)
+
 # Let vim respect XDG
 if command -v vim &> /dev/null; then
     export GVIMINIT='let $MYGVIMRC = !has("nvim") ? "$XDG_CONFIG_HOME/vim/gvimrc" : "$XDG_CONFIG_HOME/nvim/init.lua" | so $MYGVIMRC'
