@@ -391,6 +391,9 @@ if command -v fzf &> /dev/null; then
         debian)
             source /usr/share/doc/fzf/examples/key-bindings.zsh
             ;;
+        termux)
+            source "$PREFIX/share/fzf/key-bindings.zsh"
+            ;;
         *)
             echo "[WARN] unhandled OS: '$__OS'"
             ;;
