@@ -373,14 +373,15 @@ if command -v ranger &> /dev/null; then
 fi
 # }}}
 # Automatically change directory after exiting yazi {{{
-function yy() {
-	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
-	yazi "$@" --cwd-file="$tmp"
-	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-		cd -- "$cwd"
-	fi
-	\rm -f -- "$tmp"
-}
+if command -v yazi &> /dev/null; then
+    function y() {
+        local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+        yazi "$@" --cwd-file="$tmp"
+        IFS= read -r -d '' cwd < "$tmp"
+        [ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+        \rm -f -- "$tmp"
+    }
+fi
 # }}}
 # fzf {{{
 if command -v fzf &> /dev/null; then
