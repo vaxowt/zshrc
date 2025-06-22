@@ -66,10 +66,15 @@ __PROMPT_EXITCODE="%(?..%? )"
 
 function __prompt_python() {
     local python_venv_tool=""
-    [[ -n ${PYENV_VERSION} || -f "./.python-version" ]] && python_venv_tool="pyenv|uv"
-    [[ -n ${VIRTUAL_ENV} ]] && python_venv_tool="venv: ${VIRTUAL_ENV_PROMPT:1:-2}"
-    [[ ${POETRY_ACTIVE} -eq 1 ]] && python_venv_tool="poetry"
-    [[ -z ${python_venv_tool} ]] && return
+    if [[ -n ${VIRTUAL_ENV} ]]; then
+        python_venv_tool="venv: ${VIRTUAL_ENV_PROMPT}"
+    elif [[ ${POETRY_ACTIVE} -eq 1 ]]; then
+        python_venv_tool="poetry"
+    elif [[ -n ${PYENV_VERSION} ]]; then
+        python_venv_tool="pyenv"
+    else
+        return
+    fi
     local python_version=$(python -c "import platform; print(platform.python_version())")
     print -Pn "%{$bg[blue]%}  %{$bg[green]%} $python_version ($python_venv_tool) %{$reset_color%} "
 }
