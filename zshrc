@@ -308,10 +308,12 @@ if command -v git &> /dev/null; then
 fi
 
 if command -v docker &> /dev/null; then
+    alias dc='docker compose'
     alias dcp='docker compose pull'
     alias dcl='docker compose logs'
     alias dclf='docker compose logs -f'
     alias dcu='docker compose up -d --remove-orphans'
+    alias dcd='docker compose down'
 fi
 
 if command -v goldendict &> /dev/null; then
