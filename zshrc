@@ -303,7 +303,15 @@ if command -v git &> /dev/null; then
     alias gcm="git commit -m"
     alias glg="git log --oneline --graph --all"
     alias gpl="git pull"
+    alias gPp="git push"
     alias gco="git checkout"
+fi
+
+if command -v docker &> /dev/null; then
+    alias dcp='docker compose pull'
+    alias dcl='docker compose logs'
+    alias dclf='docker compose logs -f'
+    alias dcu='docker compose up -d --remove-orphans'
 fi
 
 if command -v goldendict &> /dev/null; then
