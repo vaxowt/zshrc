@@ -1,4 +1,4 @@
-export TERM="xterm-256color"
+# export TERM="xterm-256color"
 
 export XDG_CONFIG_HOME="${HOME}/.config"
 export XDG_DATA_HOME="${HOME}/.local/share"
@@ -20,12 +20,14 @@ function find-os() {
         # If available, use LSB to identify distribution
         elif [[ -f /etc/lsb-release || -d /etc/lsb-release.d ]]; then
             OS=$(lsb_release -i | cut -d: -f2 | sed s/'^\t'//)
-        # Otherwise, use release info file
-        elif echo "$PREFIX" | grep -q com.termux; then
+        # Check for Termux (Android)
+        elif [[ "${PREFIX-}" == *com.termux* ]]; then
             OS=termux
         else
             OS=$(ls -d /etc/[A-Za-z]*[_-][rv]e[lr]* | grep -v "lsb" | cut -d'/' -f3 | cut -d'-' -f1 | cut -d'_' -f1)
         fi
+    elif [[ -n "${MSYSTEM-}" ]]; then
+        OS=msys2
     fi
     # For everything else (or if above failed), just use generic identifier
     [[ "$OS" == "" ]] && OS=$UNAME

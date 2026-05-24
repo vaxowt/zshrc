@@ -158,7 +158,7 @@ setopt GLOB_DOTS
 unsetopt BEEP
 # }}}
 # Input/Output {{{
-# Must use >| to truncate existing files
+# Allow `>` to overwrite existing files (use `>|` with `unsetopt CLOBBER`)
 setopt CLOBBER
 # Do not exit on end-of-file
 unsetopt IGNORE_EOF
@@ -332,7 +332,7 @@ fi
 function whatip() {
     local ip138='http://api.ip138.com/query/'
     local datatype='txt'
-    local token="$(cat ${XDG_CONFIG_HOME}/secrets/ip138.com.token)"
+    local token=$(<"${XDG_CONFIG_HOME}/secrets/ip138.com.token")
     local target_ip
 
     echo "Data from ${ip138}"
@@ -409,6 +409,8 @@ if command -v fzf &> /dev/null; then
             ;;
         termux)
             source "$PREFIX/share/fzf/key-bindings.zsh"
+            ;;
+        msys2)
             ;;
         *)
             echo "[WARN] unhandled OS: '$__OS'"
