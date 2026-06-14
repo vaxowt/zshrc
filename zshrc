@@ -289,7 +289,6 @@ alias ...="cd ../.."
 alias cdl="cd -1"
 alias cdd='__v=$(dirs -p | fzf) && cd "${__v/#\~/$HOME}" && unset __v'
 
-
 alias ls="ls --color=auto"
 alias l="ls -alh"
 alias ll="ls -lh"
@@ -307,9 +306,12 @@ if command -v git &> /dev/null; then
     alias gst="git status"
     alias gau='git add --update'
     alias gcm="git commit -m"
+    alias gdf="git diff"
+    alias gds="git diff --staged"
+    alias gll="git log --oneline --graph"
     alias glg="git log --oneline --graph --all"
     alias gpl="git pull"
-    alias gPp="git push"
+    alias gph="git push"
     alias gco="git checkout"
 fi
 
