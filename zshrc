@@ -1,5 +1,11 @@
 # Plugins {{{
 __MINIPLUG_ZSH="$XDG_DATA_HOME/miniplug/miniplug.zsh"
+if [[ ! -f "$__MINIPLUG_ZSH" ]]; then
+    echo "Downloading miniplug ..."
+    mkdir -p "${__MINIPLUG_ZSH:h}"
+    curl -sL https://git.sr.ht/~yerinalexey/miniplug/blob/master/miniplug.zsh \
+      -o "$__MINIPLUG_ZSH"
+fi
 source "${__MINIPLUG_ZSH}"
 # Replace zsh's default completion selection menu with fzf
 # Load this plugin first!!!!
@@ -402,13 +408,16 @@ fi
 if command -v fzf &> /dev/null; then
     case "$__OS" in
         arch)
-            source /usr/share/fzf/key-bindings.zsh
+            [[ -f /usr/share/fzf/key-bindings.zsh ]] && \
+                source /usr/share/fzf/key-bindings.zsh
             ;;
         debian)
-            source /usr/share/doc/fzf/examples/key-bindings.zsh
+            [[ -f /usr/share/doc/fzf/examples/key-bindings.zsh ]] && \
+                source /usr/share/doc/fzf/examples/key-bindings.zsh
             ;;
         termux)
-            source "$PREFIX/share/fzf/key-bindings.zsh"
+            [[ -f "$PREFIX/share/fzf/key-bindings.zsh" ]] && \
+                source "$PREFIX/share/fzf/key-bindings.zsh"
             ;;
         msys2)
             ;;
