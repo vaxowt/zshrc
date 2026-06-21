@@ -22,6 +22,8 @@ miniplug plugin zdharma-continuum/fast-syntax-highlighting
 # miniplug plugin zsh-users/zsh-syntax-highlighting
 miniplug plugin zsh-users/zsh-autosuggestions
 miniplug plugin zsh-users/zsh-completions
+# Auto-close and delete matching delimiters in zsh
+miniplug plugin hlissner/zsh-autopair
 miniplug load
 # }}}
 # Colors {{{
@@ -332,6 +334,9 @@ fi
 if command -v fzf &> /dev/null; then
     enable-fzf-tab
 fi
+# }}}
+# hlissner/zsh-autopair {{{2
+autopair-init
 # }}}
 # }}}
 # Misc {{{
