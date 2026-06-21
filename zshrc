@@ -1,11 +1,18 @@
 # Plugins {{{
 __MINIPLUG_ZSH="$XDG_DATA_HOME/miniplug/miniplug.zsh"
+
+function miniplug-self-update() {
+    echo -n 'Updating miniplug ... '
+    curl -sL --create-dirs \
+      https://git.sr.ht/~yerinalexey/miniplug/blob/master/miniplug.zsh \
+      -o "${__MINIPLUG_ZSH}"
+    [[ $? == 0 ]] && echo "done" || echo "failed"
+}
+
 if [[ ! -f "$__MINIPLUG_ZSH" ]]; then
-    echo "Downloading miniplug ..."
-    mkdir -p "${__MINIPLUG_ZSH:h}"
-    curl -sL https://git.sr.ht/~yerinalexey/miniplug/blob/master/miniplug.zsh \
-      -o "$__MINIPLUG_ZSH"
+    miniplug-self-update
 fi
+
 source "${__MINIPLUG_ZSH}"
 # Replace zsh's default completion selection menu with fzf
 # Load this plugin first!!!!
@@ -16,14 +23,6 @@ miniplug plugin zdharma-continuum/fast-syntax-highlighting
 miniplug plugin zsh-users/zsh-autosuggestions
 miniplug plugin zsh-users/zsh-completions
 miniplug load
-
-function miniplug-self-update() {
-    echo -n 'Updating miniplug ... '
-    curl -sL --create-dirs \
-      https://git.sr.ht/~yerinalexey/miniplug/blob/master/miniplug.zsh \
-      -o "${__MINIPLUG_ZSH}"
-    [[ $? == 0 ]] && echo "done" || echo "failed"
-}
 # }}}
 # Colors {{{
 autoload -U colors && colors
